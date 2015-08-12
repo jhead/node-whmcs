@@ -35,7 +35,7 @@ Support.prototype.openTicket = function (clientid, department, subject, message,
   if(typeof opts === 'function'){
     callback = opts;
   } else {
-    options = extend(options,opts);
+    options = extend(options, opts);
   }
 
   var createOptions = {
@@ -179,6 +179,31 @@ Support.prototype.updateTicket = function (opts, callback) {
   } else {
     options = extend(options, opts);
   }
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
+/**
+* Get support departments - http://docs.whmcs.com/API:Get_Support_Departments
+* @param [ignoreAssignments] Boolean Return all departments, not just the ones the API user is assigned to
+* @param callback
+*/
+Support.prototype.getDepartments = function (ignoreAssignments, callback) {
+  var options = {
+    action: 'getsupportdepartments'
+  };
+
+  if (typeof ignoreAssignments === 'function') {
+    callback = ignoreAssignments;
+    ignoreAssignments = false;
+  }
+
+  options.ignore_dept_assignments = (ignoreAssignments === true);
 
   var createOptions = {
     client: this,
