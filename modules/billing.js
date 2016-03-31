@@ -289,4 +289,38 @@ Billing.prototype.updateInvoice = function (invoiceid, opts, callback) {
   utils.modem(createOptions, callback);
 };
 
+/**
+ * Update invoice - http://docs.whmcs.com/API:Add_Invoice_Payment
+ * @param invoiceid String|Number Invoice ID
+ * @param transid String Transaction ID
+ * @param gateway String Payment gateway
+ * @param [opts] object
+ * @param [opts.amount] Number Transaction amount
+ * @param [opts.fees] Number Transaction fees
+ * @param [opts.noemail] Boolean Set to true to prevent sending an email
+ * @param [opts.date] String Transaction date in format YYYY-MM-DD HH:mm:ss
+ * @param callback
+ */
+Billing.prototype.addInvoicePayment = function (invoiceid, transid, gateway, opts, callback) {
+  var options = {
+    action: 'addinvoicepayment',
+    invoiceid: invoiceid,
+    transid: transactionid,
+    gateway: gateway
+  };
+
+  if (typeof opts === 'function') {
+    callback = opts;
+  } else {
+    options = extend(options, opts);
+  }
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
 module.exports = Billing;
