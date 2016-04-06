@@ -290,7 +290,7 @@ Billing.prototype.updateInvoice = function (invoiceid, opts, callback) {
 };
 
 /**
- * Update invoice - http://docs.whmcs.com/API:Add_Invoice_Payment
+ * Add invoice payment - http://docs.whmcs.com/API:Add_Invoice_Payment
  * @param invoiceid String|Number Invoice ID
  * @param transid String Transaction ID
  * @param gateway String Payment gateway
@@ -313,6 +313,33 @@ Billing.prototype.addInvoicePayment = function (invoiceid, transid, gateway, opt
     callback = opts;
   } else {
     options = extend(options, opts);
+  }
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
+/**
+ * Capture payment - http://docs.whmcs.com/API:Capture_Payment
+ * @param invoiceid String|Number
+ * @param [opts] Object
+ * @param [opts.cvv] String
+ * @param callback
+ */
+Billing.prototype.capturePayment = function (invoiceid, opts, callback) {
+  var options = {
+    action:'capturepayment',
+    invoiceid:invoiceid
+  };
+
+  if(typeof opts === 'function'){
+    callback = opts;
+  } else {
+    options = extend(options,opts);
   }
 
   var createOptions = {

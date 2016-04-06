@@ -68,6 +68,8 @@ whmcs_client.customers.getCustomerEmails(clientid, function(err, emails) {
 - cancelOrder: function (orderid, callback)
 - deleteOrder: function (orderid, callback)
 - createInvoice: function (clientid, invoice, callback)
+- capturePayment: function (invoiceid, options, callback)
+- addInvoicePayment: function (invoiceid, transid, gateway, options, callback)
 
 ### Customers
 
@@ -95,6 +97,7 @@ whmcs_client.customers.getCustomerEmails(clientid, function(err, emails) {
 - getProducts: function (gid, callback)
 - getProductsByType: function (type, id, callback)
 - getOrders: function (method, id, offset, limit, callback)
+- upgradeProduct: function (product, callback)
 
 
 ### Support
