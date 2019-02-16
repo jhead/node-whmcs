@@ -21,7 +21,7 @@
     "hosting"
   ],
   "dependencies": {
-    "request": "^2.85.0",
+    "request": "2.88.0",
     "xml2js": "0.4.x"
   },
   "devDependencies": {
